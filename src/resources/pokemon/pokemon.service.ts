@@ -30,9 +30,9 @@ export class PokemonService {
     const mapPokemon: Array<Pokemon> = await Promise.all<Pokemon>(
       arrReesult.map(async ({ url }) => {
         //Obtemos los datos por cada uno de los pokemon
-        const { abilities, name, sprites, types, weight }: Pokemon =
+        const { id, abilities, name, sprites, types, weight }: Pokemon =
           await this.findDetails(undefined, url);
-        return { abilities, name, sprites, types, weight };
+        return { id, abilities, name, sprites, types, weight };
       }),
     );
     return mapPokemon;
@@ -51,15 +51,17 @@ export class PokemonService {
     };
   }
 
-  private async findDetails(id?: number, url?: string): Promise<any> {
-    const { name, abilities, sprites, types, weight, moves }: Pokemon = await (
-      await firstValueFrom(
-        this.httpService.get(id ? `${this.urlbase}pokemon/${id}` : url),
-      )
-    ).data;
+  private async findDetails(idUrl?: number, url?: string): Promise<any> {
+    const { id, name, abilities, sprites, types, weight, moves }: Pokemon =
+      await (
+        await firstValueFrom(
+          this.httpService.get(idUrl ? `${this.urlbase}pokemon/${idUrl}` : url),
+        )
+      ).data;
 
     //Modificamos el retorno de datos para mejor visibilidad
     return {
+      id,
       name,
       sprites: sprites.front_default,
       weight,

@@ -7,8 +7,9 @@ export class translate_interface {
    * @returns
    */
   translatePokemon(objPokemon: Pokemon): Object {
-    const { abilities, name, sprites, types, weight, moves } = objPokemon;
+    const { id, abilities, name, sprites, types, weight, moves } = objPokemon;
     return {
+      id,
       nombre: name,
       foto: sprites,
       tipo: types,

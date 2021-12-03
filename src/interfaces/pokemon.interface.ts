@@ -1,4 +1,5 @@
 export interface Pokemon {
+  readonly id: number;
   readonly name: string;
   readonly sprites: sprites;
   readonly types: Array<types>;
