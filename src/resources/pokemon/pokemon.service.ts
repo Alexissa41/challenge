@@ -45,7 +45,6 @@ export class PokemonService {
 
     //buscamos la descripcion
     const description = await this.findDescription(id);
-    console.log(objPokemonSpanish);
     return {
       ...objPokemonSpanish,
       descripcion: description,
